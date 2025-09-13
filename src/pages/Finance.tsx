@@ -104,6 +104,53 @@ const Finance = () => {
         </div>
       </div>
 
+      {/* Course Fee Structure */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Course Fee Structure</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div>
+              <label className="text-sm font-medium text-muted-foreground mb-2 block">Select Course</label>
+              <select className="w-full p-2 border rounded-lg bg-background text-foreground">
+                <option value="">Choose a course...</option>
+                <option value="btech-cs">B.Tech Computer Science</option>
+                <option value="btech-me">B.Tech Mechanical Engineering</option>
+                <option value="btech-ee">B.Tech Electrical Engineering</option>
+                <option value="mba">MBA Business Administration</option>
+                <option value="mtech-cs">M.Tech Computer Science</option>
+              </select>
+            </div>
+            <div className="space-y-4">
+              <div className="p-4 bg-gradient-to-r from-primary to-secondary rounded-lg text-white">
+                <h3 className="font-medium mb-2">B.Tech Computer Science - Total Fee</h3>
+                <p className="text-2xl font-bold">₹2,85,000</p>
+                <p className="text-sm opacity-90">Per Academic Year</p>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                <div className="p-2 bg-card border rounded">
+                  <p className="text-muted-foreground">Tuition Fee</p>
+                  <p className="font-medium">₹2,00,000</p>
+                </div>
+                <div className="p-2 bg-card border rounded">
+                  <p className="text-muted-foreground">Development Fee</p>
+                  <p className="font-medium">₹50,000</p>
+                </div>
+                <div className="p-2 bg-card border rounded">
+                  <p className="text-muted-foreground">Lab Fee</p>
+                  <p className="font-medium">₹25,000</p>
+                </div>
+                <div className="p-2 bg-card border rounded">
+                  <p className="text-muted-foreground">Other Charges</p>
+                  <p className="font-medium">₹10,000</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Financial Overview */}
       <div className="grid gap-4 md:grid-cols-4">
         <Card className="bg-gradient-to-br from-success to-secondary">

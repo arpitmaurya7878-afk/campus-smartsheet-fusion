@@ -49,7 +49,7 @@ const Admissions = () => {
       email: 'emily.rodriguez@email.com',
       phone: '+1-555-0125',
       program: 'Engineering',
-      status: 'interview',
+      status: 'review',
       appliedDate: '2024-01-17',
       documents: 'Complete'
     }
@@ -59,7 +59,7 @@ const Admissions = () => {
     switch (status) {
       case 'approved': return 'bg-success text-success-foreground';
       case 'pending': return 'bg-warning text-warning-foreground';
-      case 'interview': return 'bg-primary text-primary-foreground';
+      case 'review': return 'bg-primary text-primary-foreground';
       case 'rejected': return 'bg-destructive text-destructive-foreground';
       default: return 'bg-muted text-muted-foreground';
     }
@@ -133,10 +133,10 @@ const Admissions = () => {
           <CardContent className="p-6">
             <div className="flex items-center">
               <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">👥</span>
+                <span className="text-primary-foreground font-bold text-sm">👁</span>
               </div>
               <div className="ml-4">
-                <p className="text-sm font-medium text-muted-foreground">Interview</p>
+                <p className="text-sm font-medium text-muted-foreground">Under Review</p>
                 <p className="text-2xl font-bold">110</p>
               </div>
             </div>
@@ -168,7 +168,7 @@ const Admissions = () => {
                 <SelectItem value="all">All Status</SelectItem>
                 <SelectItem value="approved">Approved</SelectItem>
                 <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="interview">Interview</SelectItem>
+                <SelectItem value="review">Under Review</SelectItem>
                 <SelectItem value="rejected">Rejected</SelectItem>
               </SelectContent>
             </Select>

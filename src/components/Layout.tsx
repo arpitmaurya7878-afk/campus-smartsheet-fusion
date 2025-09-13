@@ -8,10 +8,15 @@ import {
   GraduationCap, 
   BarChart3,
   Settings,
-  User
+  User,
+  ClipboardCheck,
+  Library as LibraryIcon,
+  MessageSquare
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import ChatbotWidget from './ChatbotWidget';
+import SMSNotification from './SMSNotification';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -19,14 +24,17 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
+  const [showSMSModal, setShowSMSModal] = React.useState(false);
 
   const navigation = [
     { name: 'Dashboard', href: '/', icon: BarChart3 },
     { name: 'Admissions', href: '/admissions', icon: Users },
     { name: 'Finance', href: '/finance', icon: CreditCard },
+    { name: 'Attendance', href: '/attendance', icon: ClipboardCheck },
     { name: 'Hostel', href: '/hostel', icon: Building },
+    { name: 'Library', href: '/library', icon: LibraryIcon },
     { name: 'Examinations', href: '/examinations', icon: GraduationCap },
-    { name: 'Reports', href: '/reports', icon: BookOpen },
+    { name: 'Reports', href: '/reports', icon: BarChart3 },
   ];
 
   return (
@@ -45,6 +53,14 @@ const Layout = ({ children }: LayoutProps) => {
             </div>
             
             <div className="flex items-center space-x-4">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => setShowSMSModal(true)}
+                className="hover:bg-primary/10"
+              >
+                <MessageSquare className="h-4 w-4" />
+              </Button>
               <Button variant="ghost" size="sm">
                 <Settings className="h-4 w-4" />
               </Button>
@@ -90,6 +106,12 @@ const Layout = ({ children }: LayoutProps) => {
           {children}
         </main>
       </div>
+      
+      {/* Chatbot Widget */}
+      <ChatbotWidget />
+      
+      {/* SMS Notification Modal */}
+      <SMSNotification isOpen={showSMSModal} onClose={() => setShowSMSModal(false)} />
     </div>
   );
 };
