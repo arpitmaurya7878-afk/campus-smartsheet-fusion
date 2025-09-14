@@ -61,38 +61,38 @@ const Dashboard = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Dashboard</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">
             Welcome back! Here's what's happening at your college today.
           </p>
         </div>
-        <Button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90">
+        <Button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 w-full sm:w-auto">
           <TrendingUp className="mr-2 h-4 w-4" />
           View Reports
         </Button>
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {metrics.map((metric, index) => (
           <MetricCard key={index} {...metric} />
         ))}
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 lg:grid-cols-3">
         {/* Recent Activities */}
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle className="flex items-center">
+            <CardTitle className="flex items-center text-lg">
               <Clock className="mr-2 h-5 w-5" />
               Recent Activities
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
+            <div className="space-y-4 max-h-96 overflow-y-auto">
               {recentActivities.map((activity, index) => {
                 const Icon = activity.icon;
                 const iconColor = {
@@ -103,9 +103,9 @@ const Dashboard = () => {
                 
                 return (
                   <div key={index} className="flex items-start space-x-3 p-3 rounded-lg bg-accent hover:bg-accent-hover transition-colors">
-                    <Icon className={`h-5 w-5 mt-0.5 ${iconColor}`} />
-                    <div className="flex-1">
-                      <p className="text-sm text-foreground">{activity.text}</p>
+                    <Icon className={`h-5 w-5 mt-0.5 flex-shrink-0 ${iconColor}`} />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-foreground break-words">{activity.text}</p>
                       <p className="text-xs text-muted-foreground">{activity.time}</p>
                     </div>
                   </div>
@@ -121,21 +121,21 @@ const Dashboard = () => {
             <CardTitle>Quick Actions</CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
-            <Button variant="outline" className="w-full justify-start">
-              <Users className="mr-2 h-4 w-4" />
-              New Admission
+            <Button variant="outline" className="w-full justify-start text-left">
+              <Users className="mr-2 h-4 w-4 flex-shrink-0" />
+              <span className="truncate">New Admission</span>
             </Button>
-            <Button variant="outline" className="w-full justify-start">
-              <CreditCard className="mr-2 h-4 w-4" />
-              Record Payment
+            <Button variant="outline" className="w-full justify-start text-left">
+              <CreditCard className="mr-2 h-4 w-4 flex-shrink-0" />
+              <span className="truncate">Record Payment</span>
             </Button>
-            <Button variant="outline" className="w-full justify-start">
-              <Building className="mr-2 h-4 w-4" />
-              Assign Room
+            <Button variant="outline" className="w-full justify-start text-left">
+              <Building className="mr-2 h-4 w-4 flex-shrink-0" />
+              <span className="truncate">Assign Room</span>
             </Button>
-            <Button variant="outline" className="w-full justify-start">
-              <GraduationCap className="mr-2 h-4 w-4" />
-              Upload Grades
+            <Button variant="outline" className="w-full justify-start text-left">
+              <GraduationCap className="mr-2 h-4 w-4 flex-shrink-0" />
+              <span className="truncate">Upload Grades</span>
             </Button>
           </CardContent>
         </Card>
