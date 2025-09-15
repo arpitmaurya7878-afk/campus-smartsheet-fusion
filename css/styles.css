@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Base colors */
+  --background: 244 249 252; /* #f4f9fc */
+  --foreground: 29 78 137; /* #1d4e89 */
+  --card: 255 255 255; /* #ffffff */
+  --card-foreground: 29 78 137; /* #1d4e89 */
+  --popover: 255 255 255; /* #ffffff */
+  --popover-foreground: 29 78 137; /* #1d4e89 */
+  
+  /* Primary colors */
+  --primary: 29 78 137; /* #1d4e89 */
+  --primary-foreground: 255 255 255; /* #ffffff */
+  
+  /* Secondary colors */
+  --secondary: 255 255 255; /* #ffffff */
+  --secondary-foreground: 29 78 137; /* #1d4e89 */
+  
+  /* Muted colors */
+  --muted: 208 228 247; /* #d0e4f7 */
+  --muted-foreground: 96 125 139; /* #607d8b */
+  
+  /* Accent colors */
+  --accent: 208 228 247; /* #d0e4f7 */
+  --accent-foreground: 29 78 137; /* #1d4e89 */
+  
+  /* Destructive */
+  --destructive: 244 67 54; /* #f44336 */
+  --destructive-foreground: 255 255 255; /* #ffffff */
+  
+  /* Success */
+  --success: 76 175 80; /* #4caf50 */
+  --success-foreground: 255 255 255; /* #ffffff */
+  
+  /* Warning */
+  --warning: 255 152 0; /* #ff9800 */
+  --warning-foreground: 255 255 255; /* #ffffff */
+  
+  /* Border */
+  --border: 224 224 224; /* #e0e0e0 */
+  --input: 207 216 225; /* #cfd8e1 */
+  
+  /* Ring */
+  --ring: 29 78 137; /* #1d4e89 */
+  
+  /* Chart colors */
+  --chart-1: 12 76 138;
+  --chart-2: 16 163 127;
+  --chart-3: 254 240 138;
+  --chart-4: 34 197 94;
+  --chart-5: 239 68 68;
+  
+  --radius: 0.5rem;
+
+  /* Sidebar colors */
+  --sidebar-bg: 0 95 115; /* #005f73 */
+  --sidebar-active: 10 147 150; /* #0a9396 */
+  --sidebar-text: 255 255 255; /* #ffffff */
+  
+  /* Main content */
+  --main-bg: 244 249 252; /* #f4f9fc */
+  --header-text: 29 78 137; /* #1d4e89 */
+  --description-text: 96 125 139; /* #607d8b */
+  
+  /* Buttons */
+  --btn-primary-bg: 29 78 137; /* #1d4e89 */
+  --btn-primary-text: 255 255 255; /* #ffffff */
+  --btn-secondary-bg: 255 255 255; /* #ffffff */
+  --btn-secondary-text: 29 78 137; /* #1d4e89 */
+  
+  /* Cards */
+  --card-bg: 255 255 255; /* #ffffff */
+  --card-border: 224 224 224; /* #e0e0e0 */
+  
+  /* Icons */
+  --icon-default: 0 0 0; /* #000000 */
+  --icon-success: 76 175 80; /* #4caf50 */
+  --icon-warning: 255 152 0; /* #ff9800 */
+  --icon-error: 244 67 54; /* #f44336 */
+  
+  /* Tabs */
+  --tab-selected-bg: 29 78 137; /* #1d4e89 */
+  --tab-selected-text: 255 255 255; /* #ffffff */
+  --tab-unselected-bg: 208 228 247; /* #d0e4f7 */
+  --tab-unselected-text: 29 78 137; /* #1d4e89 */
+  
+  /* Search */
+  --search-border: 207 216 225; /* #cfd8e1 */
+  --search-placeholder: 144 164 174; /* #90a4ae */
+  
+  /* FAB */
+  --fab-bg: 29 78 137; /* #1d4e89 */
+  --fab-icon: 255 255 255; /* #ffffff */
+}
+
+.dark {
+  --background: 20 14 40;
+  --foreground: 210 40% 98%;
+  --card: 20 14 40;
+  --card-foreground: 210 40% 98%;
+  --popover: 20 14 40;
+  --popover-foreground: 210 40% 98%;
+  --primary: 263 70% 50%;
+  --primary-foreground: 210 20% 98%;
+  --secondary: 215 25% 27%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 215 25% 27%;
+  --muted-foreground: 217.9 10.6% 64.9%;
+  --accent: 215 25% 27%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 215 27.9% 16.9%;
+  --input: 215 27.9% 16.9%;
+  --ring: 263 70% 50%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
+
+/* Mobile navigation animation */
+.nav-slide-in {
+  transform: translateX(0) !important;
+}
+
+/* Responsive utilities */
+@media (max-width: 768px) {
+  .mobile-hidden {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .desktop-hidden {
+    display: none !important;
+  }
+}

@@ -1,29 +1,242 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CampusFusion - College ERP System</title>
-    <meta name="description" content="CampusFusion - Comprehensive College ERP System for managing admissions, finance, hostel, and examinations" />
-    <meta name="author" content="CampusFusion College ERP" />
+    <meta name="description" content="CampusFusion - Complete College ERP System for managing admissions, finance, attendance, hostel, library, examinations and reports">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                container: {
+                    center: true,
+                    padding: "2rem",
+                    screens: {
+                        "2xl": "1400px",
+                    },
+                },
+                extend: {
+                    fontFamily: {
+                        roboto: ['Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        border: "hsl(var(--border))",
+                        input: "hsl(var(--input))",
+                        ring: "hsl(var(--ring))",
+                        background: "hsl(var(--background))",
+                        foreground: "hsl(var(--foreground))",
+                        primary: {
+                            DEFAULT: "hsl(var(--primary))",
+                            foreground: "hsl(var(--primary-foreground))",
+                        },
+                        secondary: {
+                            DEFAULT: "hsl(var(--secondary))",
+                            foreground: "hsl(var(--secondary-foreground))",
+                        },
+                        destructive: {
+                            DEFAULT: "hsl(var(--destructive))",
+                            foreground: "hsl(var(--destructive-foreground))",
+                        },
+                        muted: {
+                            DEFAULT: "hsl(var(--muted))",
+                            foreground: "hsl(var(--muted-foreground))",
+                        },
+                        accent: {
+                            DEFAULT: "hsl(var(--accent))",
+                            foreground: "hsl(var(--accent-foreground))",
+                        },
+                        popover: {
+                            DEFAULT: "hsl(var(--popover))",
+                            foreground: "hsl(var(--popover-foreground))",
+                        },
+                        card: {
+                            DEFAULT: "hsl(var(--card))",
+                            foreground: "hsl(var(--card-foreground))",
+                        },
+                        success: {
+                            DEFAULT: "hsl(var(--success))",
+                            foreground: "hsl(var(--success-foreground))",
+                        },
+                        warning: {
+                            DEFAULT: "hsl(var(--warning))",
+                            foreground: "hsl(var(--warning-foreground))",
+                        },
+                    },
+                    borderRadius: {
+                        lg: "var(--radius)",
+                        md: "calc(var(--radius) - 2px)",
+                        sm: "calc(var(--radius) - 4px)",
+                    },
+                    keyframes: {
+                        "accordion-down": {
+                            from: { height: "0" },
+                            to: { height: "var(--radix-accordion-content-height)" },
+                        },
+                        "accordion-up": {
+                            from: { height: "var(--radix-accordion-content-height)" },
+                            to: { height: "0" },
+                        },
+                        "fade-in": {
+                            from: { opacity: "0", transform: "translateY(10px)" },
+                            to: { opacity: "1", transform: "translateY(0)" },
+                        },
+                    },
+                    animation: {
+                        "accordion-down": "accordion-down 0.2s ease-out",
+                        "accordion-up": "accordion-up 0.2s ease-out",
+                        "fade-in": "fade-in 0.2s ease-out",
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-roboto min-h-screen bg-background">
+    <!-- Top Navigation -->
+    <header class="sticky top-0 z-50 border-b border-border bg-card shadow-sm">
+        <div class="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <!-- Mobile Menu Toggle -->
+                    <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                        <i data-lucide="menu" class="h-5 w-5"></i>
+                    </button>
+                    
+                    <div class="flex-shrink-0">
+                        <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                            CampusFusion
+                        </h1>
+                        <p class="text-xs text-muted-foreground hidden sm:block">College ERP System</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <button id="sms-button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 hover:bg-primary/10">
+                        <i data-lucide="message-square" class="h-4 w-4"></i>
+                        <span class="sr-only">Messages</span>
+                    </button>
+                    <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
+                        <i data-lucide="settings" class="h-4 w-4"></i>
+                        <span class="sr-only">Settings</span>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <div class="relative flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 overflow-hidden rounded-full">
+                            <div class="flex h-full w-full items-center justify-center rounded-full bg-muted">AD</div>
+                        </div>
+                        <div class="text-sm hidden sm:block">
+                            <p class="font-medium text-foreground">Administrator</p>
+                            <p class="text-muted-foreground text-xs">admin@college.edu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-    <!-- Google Fonts - Roboto for MNIT-style typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <div class="flex">
+        <!-- Desktop Side Navigation -->
+        <nav id="desktop-nav" class="hidden md:block w-64 bg-card border-r border-border min-h-[calc(100vh-4rem)] sticky top-16">
+            <div class="p-4">
+                <div id="nav-items" class="space-y-2">
+                    <!-- Navigation items will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </nav>
 
-    <meta property="og:title" content="CampusFusion - College ERP System" />
-    <meta property="og:description" content="Modern, cloud-powered ERP system for small colleges with comprehensive management modules" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+        <!-- Mobile Side Navigation Overlay -->
+        <div id="mobile-nav-overlay" class="fixed inset-0 z-50 hidden md:hidden">
+            <div class="fixed inset-0 bg-black/50" id="mobile-nav-backdrop"></div>
+            <div class="fixed left-0 top-0 h-full w-64 bg-card border-r border-border p-4 transform -translate-x-full transition-transform duration-300" id="mobile-nav-content">
+                <div class="mb-6">
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        CampusFusion
+                    </h1>
+                    <p class="text-xs text-muted-foreground">College ERP System</p>
+                </div>
+                <div id="mobile-nav-items" class="space-y-2">
+                    <!-- Navigation items will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+        <!-- Main Content -->
+        <main class="flex-1 p-4 sm:p-6 lg:p-8 min-h-[calc(100vh-4rem)] w-full max-w-full overflow-x-hidden">
+            <div id="page-content">
+                <!-- Page content will be loaded here -->
+            </div>
+        </main>
+    </div>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <!-- Chatbot Widget -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="chatbot-toggle" class="w-14 h-14 rounded-full shadow-lg hover:scale-110 transition-all duration-200 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90">
+            <i data-lucide="message-circle" class="h-6 w-6"></i>
+        </button>
+    </div>
+
+    <!-- Chatbot Window -->
+    <div id="chatbot-window" class="fixed bottom-24 right-6 w-80 h-96 z-50 animate-fade-in hidden">
+        <div class="h-full shadow-2xl rounded-lg border bg-card text-card-foreground">
+            <div class="flex flex-col space-y-1.5 p-6 bg-gradient-to-r from-primary to-secondary text-white rounded-t-lg">
+                <h3 class="text-lg font-semibold leading-none tracking-tight flex items-center">
+                    <i data-lucide="bot" class="mr-2 h-5 w-5"></i>
+                    CampusFusion Assistant
+                </h3>
+            </div>
+            <div class="flex flex-col h-full p-0">
+                <!-- Messages Area -->
+                <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3">
+                    <div class="flex justify-start">
+                        <div class="flex items-start space-x-2 max-w-[80%] flex-row">
+                            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 bg-primary text-primary-foreground">
+                                <i data-lucide="bot" class="h-3 w-3"></i>
+                            </div>
+                            <div class="rounded-lg p-2 text-sm bg-muted text-foreground">
+                                Hello! I'm the CampusFusion assistant. How can I help you today?
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="border-t p-4">
+                    <div class="flex space-x-2">
+                        <input id="chat-input" type="text" placeholder="Ask me anything..." class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-1">
+                        <button id="chat-send" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 w-10">
+                            <i data-lucide="send" class="h-4 w-4"></i>
+                        </button>
+                    </div>
+                    <div class="flex flex-wrap gap-1 mt-2">
+                        <button class="chat-quick-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-xs h-6" data-topic="admissions">Admissions</button>
+                        <button class="chat-quick-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-xs h-6" data-topic="fees">Fees</button>
+                        <button class="chat-quick-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-xs h-6" data-topic="hostel">Hostel</button>
+                        <button class="chat-quick-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-xs h-6" data-topic="library">Library</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SMS Modal -->
+    <div id="sms-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 hidden">
+        <!-- SMS Modal content will be inserted by JavaScript -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/router.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+</body>
 </html>
