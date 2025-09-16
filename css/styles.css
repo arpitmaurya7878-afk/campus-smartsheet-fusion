@@ -6,47 +6,47 @@
 
 :root {
   /* Base colors */
-  --background: 244 249 252; /* #f4f9fc */
-  --foreground: 29 78 137; /* #1d4e89 */
-  --card: 255 255 255; /* #ffffff */
-  --card-foreground: 29 78 137; /* #1d4e89 */
-  --popover: 255 255 255; /* #ffffff */
-  --popover-foreground: 29 78 137; /* #1d4e89 */
+  --background: 204 67% 97%; /* #f4f9fc */
+  --foreground: 213 66% 33%; /* #1d4e89 */
+  --card: 0 0% 100%; /* #ffffff */
+  --card-foreground: 213 66% 33%; /* #1d4e89 */
+  --popover: 0 0% 100%; /* #ffffff */
+  --popover-foreground: 213 66% 33%; /* #1d4e89 */
   
   /* Primary colors */
-  --primary: 29 78 137; /* #1d4e89 */
-  --primary-foreground: 255 255 255; /* #ffffff */
+  --primary: 213 66% 33%; /* #1d4e89 */
+  --primary-foreground: 0 0% 100%; /* #ffffff */
   
   /* Secondary colors */
-  --secondary: 255 255 255; /* #ffffff */
-  --secondary-foreground: 29 78 137; /* #1d4e89 */
+  --secondary: 0 0% 100%; /* #ffffff */
+  --secondary-foreground: 213 66% 33%; /* #1d4e89 */
   
   /* Muted colors */
-  --muted: 208 228 247; /* #d0e4f7 */
-  --muted-foreground: 96 125 139; /* #607d8b */
+  --muted: 208 73% 91%; /* #d0e4f7 */
+  --muted-foreground: 199 18% 46%; /* #607d8b */
   
   /* Accent colors */
-  --accent: 208 228 247; /* #d0e4f7 */
-  --accent-foreground: 29 78 137; /* #1d4e89 */
+  --accent: 208 73% 91%; /* #d0e4f7 */
+  --accent-foreground: 213 66% 33%; /* #1d4e89 */
   
   /* Destructive */
-  --destructive: 244 67 54; /* #f44336 */
-  --destructive-foreground: 255 255 255; /* #ffffff */
+  --destructive: 4 90% 58%; /* #f44336 */
+  --destructive-foreground: 0 0% 100%; /* #ffffff */
   
   /* Success */
-  --success: 76 175 80; /* #4caf50 */
-  --success-foreground: 255 255 255; /* #ffffff */
+  --success: 122 39% 49%; /* #4caf50 */
+  --success-foreground: 0 0% 100%; /* #ffffff */
   
   /* Warning */
-  --warning: 255 152 0; /* #ff9800 */
-  --warning-foreground: 255 255 255; /* #ffffff */
+  --warning: 36 100% 50%; /* #ff9800 */
+  --warning-foreground: 0 0% 100%; /* #ffffff */
   
   /* Border */
-  --border: 224 224 224; /* #e0e0e0 */
-  --input: 207 216 225; /* #cfd8e1 */
+  --border: 0 0% 88%; /* #e0e0e0 */
+  --input: 206 22% 84%; /* #cfd8e1 */
   
   /* Ring */
-  --ring: 29 78 137; /* #1d4e89 */
+  --ring: 213 66% 33%; /* #1d4e89 */
   
   /* Chart colors */
   --chart-1: 12 76 138;
@@ -58,44 +58,44 @@
   --radius: 0.5rem;
 
   /* Sidebar colors */
-  --sidebar-bg: 0 95 115; /* #005f73 */
-  --sidebar-active: 10 147 150; /* #0a9396 */
-  --sidebar-text: 255 255 255; /* #ffffff */
-  
+  --sidebar-bg: 188 100% 23%; /* #005f73 */
+  --sidebar-active: 182 84% 32%; /* #0a9396 */
+  --sidebar-text: 0 0% 100%; /* #ffffff */
+
   /* Main content */
-  --main-bg: 244 249 252; /* #f4f9fc */
-  --header-text: 29 78 137; /* #1d4e89 */
-  --description-text: 96 125 139; /* #607d8b */
-  
+  --main-bg: 204 67% 97%; /* #f4f9fc */
+  --header-text: 213 66% 33%; /* #1d4e89 */
+  --description-text: 199 18% 46%; /* #607d8b */
+
   /* Buttons */
-  --btn-primary-bg: 29 78 137; /* #1d4e89 */
-  --btn-primary-text: 255 255 255; /* #ffffff */
-  --btn-secondary-bg: 255 255 255; /* #ffffff */
-  --btn-secondary-text: 29 78 137; /* #1d4e89 */
-  
+  --btn-primary-bg: 213 66% 33%; /* #1d4e89 */
+  --btn-primary-text: 0 0% 100%; /* #ffffff */
+  --btn-secondary-bg: 0 0% 100%; /* #ffffff */
+  --btn-secondary-text: 213 66% 33%; /* #1d4e89 */
+
   /* Cards */
-  --card-bg: 255 255 255; /* #ffffff */
-  --card-border: 224 224 224; /* #e0e0e0 */
-  
+  --card-bg: 0 0% 100%; /* #ffffff */
+  --card-border: 0 0% 88%; /* #e0e0e0 */
+
   /* Icons */
-  --icon-default: 0 0 0; /* #000000 */
-  --icon-success: 76 175 80; /* #4caf50 */
-  --icon-warning: 255 152 0; /* #ff9800 */
-  --icon-error: 244 67 54; /* #f44336 */
-  
+  --icon-default: 0 0% 0%; /* #000000 */
+  --icon-success: 122 39% 49%; /* #4caf50 */
+  --icon-warning: 36 100% 50%; /* #ff9800 */
+  --icon-error: 4 90% 58%; /* #f44336 */
+
   /* Tabs */
-  --tab-selected-bg: 29 78 137; /* #1d4e89 */
-  --tab-selected-text: 255 255 255; /* #ffffff */
-  --tab-unselected-bg: 208 228 247; /* #d0e4f7 */
-  --tab-unselected-text: 29 78 137; /* #1d4e89 */
-  
+  --tab-selected-bg: 213 66% 33%; /* #1d4e89 */
+  --tab-selected-text: 0 0% 100%; /* #ffffff */
+  --tab-unselected-bg: 208 73% 91%; /* #d0e4f7 */
+  --tab-unselected-text: 213 66% 33%; /* #1d4e89 */
+
   /* Search */
-  --search-border: 207 216 225; /* #cfd8e1 */
-  --search-placeholder: 144 164 174; /* #90a4ae */
-  
+  --search-border: 206 22% 84%; /* #cfd8e1 */
+  --search-placeholder: 199 12% 62%; /* #90a4ae */
+
   /* FAB */
-  --fab-bg: 29 78 137; /* #1d4e89 */
-  --fab-icon: 255 255 255; /* #ffffff */
+  --fab-bg: 213 66% 33%; /* #1d4e89 */
+  --fab-icon: 0 0% 100%; /* #ffffff */
 }
 
 .dark {
