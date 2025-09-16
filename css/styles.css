@@ -1,182 +1,78 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+/* ============= CAMPUSFUSION COLLEGE MANAGEMENT SYSTEM ============= */
+/* Pure CSS - No external dependencies */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+html {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f4f9fc;
+    color: #1d4e89;
+    overflow-x: hidden;
+}
+
+/* Color Variables */
 :root {
-  /* Base colors */
-  --background: 204 67% 97%; /* #f4f9fc */
-  --foreground: 213 66% 33%; /* #1d4e89 */
-  --card: 0 0% 100%; /* #ffffff */
-  --card-foreground: 213 66% 33%; /* #1d4e89 */
-  --popover: 0 0% 100%; /* #ffffff */
-  --popover-foreground: 213 66% 33%; /* #1d4e89 */
-  
-  /* Primary colors */
-  --primary: 213 66% 33%; /* #1d4e89 */
-  --primary-foreground: 0 0% 100%; /* #ffffff */
-  
-  /* Secondary colors */
-  --secondary: 0 0% 100%; /* #ffffff */
-  --secondary-foreground: 213 66% 33%; /* #1d4e89 */
-  
-  /* Muted colors */
-  --muted: 208 73% 91%; /* #d0e4f7 */
-  --muted-foreground: 199 18% 46%; /* #607d8b */
-  
-  /* Accent colors */
-  --accent: 208 73% 91%; /* #d0e4f7 */
-  --accent-foreground: 213 66% 33%; /* #1d4e89 */
-  
-  /* Destructive */
-  --destructive: 4 90% 58%; /* #f44336 */
-  --destructive-foreground: 0 0% 100%; /* #ffffff */
-  
-  /* Success */
-  --success: 122 39% 49%; /* #4caf50 */
-  --success-foreground: 0 0% 100%; /* #ffffff */
-  
-  /* Warning */
-  --warning: 36 100% 50%; /* #ff9800 */
-  --warning-foreground: 0 0% 100%; /* #ffffff */
-  
-  /* Border */
-  --border: 0 0% 88%; /* #e0e0e0 */
-  --input: 206 22% 84%; /* #cfd8e1 */
-  
-  /* Ring */
-  --ring: 213 66% 33%; /* #1d4e89 */
-  
-  /* Chart colors */
-  --chart-1: 12 76 138;
-  --chart-2: 16 163 127;
-  --chart-3: 254 240 138;
-  --chart-4: 34 197 94;
-  --chart-5: 239 68 68;
-  
-  --radius: 0.5rem;
-
-  /* Sidebar colors */
-  --sidebar-bg: 188 100% 23%; /* #005f73 */
-  --sidebar-active: 182 84% 32%; /* #0a9396 */
-  --sidebar-text: 0 0% 100%; /* #ffffff */
-
-  /* Main content */
-  --main-bg: 204 67% 97%; /* #f4f9fc */
-  --header-text: 213 66% 33%; /* #1d4e89 */
-  --description-text: 199 18% 46%; /* #607d8b */
-
-  /* Buttons */
-  --btn-primary-bg: 213 66% 33%; /* #1d4e89 */
-  --btn-primary-text: 0 0% 100%; /* #ffffff */
-  --btn-secondary-bg: 0 0% 100%; /* #ffffff */
-  --btn-secondary-text: 213 66% 33%; /* #1d4e89 */
-
-  /* Cards */
-  --card-bg: 0 0% 100%; /* #ffffff */
-  --card-border: 0 0% 88%; /* #e0e0e0 */
-
-  /* Icons */
-  --icon-default: 0 0% 0%; /* #000000 */
-  --icon-success: 122 39% 49%; /* #4caf50 */
-  --icon-warning: 36 100% 50%; /* #ff9800 */
-  --icon-error: 4 90% 58%; /* #f44336 */
-
-  /* Tabs */
-  --tab-selected-bg: 213 66% 33%; /* #1d4e89 */
-  --tab-selected-text: 0 0% 100%; /* #ffffff */
-  --tab-unselected-bg: 208 73% 91%; /* #d0e4f7 */
-  --tab-unselected-text: 213 66% 33%; /* #1d4e89 */
-
-  /* Search */
-  --search-border: 206 22% 84%; /* #cfd8e1 */
-  --search-placeholder: 199 12% 62%; /* #90a4ae */
-
-  /* FAB */
-  --fab-bg: 213 66% 33%; /* #1d4e89 */
-  --fab-icon: 0 0% 100%; /* #ffffff */
+    --sidebar-bg: #005f73;
+    --sidebar-active: #0a9396;
+    --sidebar-text: #ffffff;
+    --main-bg: #f4f9fc;
+    --header-text: #1d4e89;
+    --description-text: #607d8b;
+    --btn-primary-bg: #1d4e89;
+    --btn-primary-text: #ffffff;
+    --btn-secondary-bg: #ffffff;
+    --btn-secondary-text: #1d4e89;
+    --card-bg: #ffffff;
+    --card-border: #e0e0e0;
+    --icon-default: #000000;
+    --icon-success: #4caf50;
+    --icon-warning: #ff9800;
+    --icon-error: #f44336;
+    --search-border: #cfd8e1;
+    --search-placeholder: #90a4ae;
+    --fab-bg: #1d4e89;
+    --fab-icon: #ffffff;
 }
 
-.dark {
-  --background: 20 14 40;
-  --foreground: 210 40% 98%;
-  --card: 20 14 40;
-  --card-foreground: 210 40% 98%;
-  --popover: 20 14 40;
-  --popover-foreground: 210 40% 98%;
-  --primary: 263 70% 50%;
-  --primary-foreground: 210 20% 98%;
-  --secondary: 215 25% 27%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 215 25% 27%;
-  --muted-foreground: 217.9 10.6% 64.9%;
-  --accent: 215 25% 27%;
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 215 27.9% 16.9%;
-  --input: 215 27.9% 16.9%;
-  --ring: 263 70% 50%;
+/* Utility Classes */
+.hidden { display: none !important; }
+.flex { display: flex; }
+.grid { display: grid; gap: 1rem; }
+.text-center { text-align: center; }
+.font-bold { font-weight: bold; }
+.rounded { border-radius: 0.375rem; }
+.shadow { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+.animate-fade-in { animation: fadeIn 0.3s ease-out; }
+
+/* Mobile Menu Animation */
+.mobile-menu-open #mobile-menu-content {
+    transform: translateX(0) !important;
 }
 
-/* Custom animations */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.2s ease-out;
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
-}
-
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--border));
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--muted-foreground));
-}
-
-/* Mobile navigation animation */
-.nav-slide-in {
-  transform: translateX(0) !important;
-}
-
-/* Responsive utilities */
+/* Responsive Grid */
 @media (max-width: 768px) {
-  .mobile-hidden {
-    display: none !important;
-  }
+    .grid { grid-template-columns: 1fr !important; }
 }
 
-@media (min-width: 769px) {
-  .desktop-hidden {
-    display: none !important;
-  }
-}
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--main-bg); }
+::-webkit-scrollbar-thumb { background: var(--search-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--description-text); }

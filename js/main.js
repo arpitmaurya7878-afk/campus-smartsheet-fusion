@@ -1,6 +1,310 @@
+// ============= COMPLETE COLLEGE MANAGEMENT SYSTEM =============
+// Pure HTML, CSS, JavaScript - No external dependencies
+
+// Simple client-side router
+class Router {
+    constructor() {
+        this.routes = {};
+        this.currentRoute = null;
+        
+        // Listen to popstate event for browser back/forward
+        window.addEventListener('popstate', () => {
+            this.navigate(window.location.pathname, false);
+        });
+    }
+    
+    // Register a route
+    register(path, handler) {
+        this.routes[path] = handler;
+    }
+    
+    // Navigate to a route
+    navigate(path, pushState = true) {
+        if (pushState && path !== window.location.pathname) {
+            window.history.pushState({}, '', path);
+        }
+        
+        this.currentRoute = path;
+        
+        // Call the handler for this route
+        if (this.routes[path]) {
+            this.routes[path]();
+        } else if (this.routes['*']) {
+            // Fallback to 404 handler
+            this.routes['*']();
+        }
+        
+        // Update active navigation
+        this.updateActiveNav();
+    }
+    
+    // Update active navigation highlighting
+    updateActiveNav() {
+        const navButtons = document.querySelectorAll('[data-route]');
+        navButtons.forEach(button => {
+            const route = button.getAttribute('data-route');
+            if (route === this.currentRoute) {
+                button.style.backgroundColor = '#0a9396';
+                button.style.color = '#ffffff';
+            } else {
+                button.style.backgroundColor = '';
+                button.style.color = '#ffffff';
+            }
+        });
+    }
+    
+    // Start the router
+    start() {
+        // Navigate to current path or default to dashboard
+        const path = window.location.pathname === '/' ? '/' : window.location.pathname;
+        this.navigate(path, false);
+    }
+}
+
+// Navigation items configuration
+const navigationItems = [
+    { name: 'Dashboard', href: '/', icon: '📊' },
+    { name: 'Admissions', href: '/admissions', icon: '👥' },
+    { name: 'Finance', href: '/finance', icon: '💳' },
+    { name: 'Attendance', href: '/attendance', icon: '✅' },
+    { name: 'Hostel', href: '/hostel', icon: '🏢' },
+    { name: 'Library', href: '/library', icon: '📚' },
+    { name: 'Examinations', href: '/examinations', icon: '🎓' },
+    { name: 'Reports', href: '/reports', icon: '📈' },
+];
+
+// Create navigation items HTML
+function createNavigationItems() {
+    return navigationItems.map(item => `
+        <button data-route="${item.href}" style="
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: none;
+            border: none;
+            color: #ffffff;
+            text-align: left;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        " onmouseover="this.style.backgroundColor='rgba(255,255,255,0.1)'" onmouseout="if(this.dataset.route !== router.currentRoute) this.style.backgroundColor=''">
+            <span style="margin-right: 12px; font-size: 16px;">${item.icon}</span>
+            ${item.name}
+        </button>
+    `).join('');
+}
+
+// Dashboard page content
+function createDashboardPage() {
+    return `
+        <div style="padding: 24px; max-width: 1200px; margin: 0 auto;">
+            <!-- Header -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+                <div>
+                    <h1 style="font-size: 2rem; font-weight: bold; color: #1d4e89; margin: 0 0 8px 0;">Dashboard</h1>
+                    <p style="color: #607d8b; margin: 0;">
+                        Welcome to CampusFusion - Your comprehensive college management system
+                    </p>
+                </div>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <button style="
+                        padding: 8px 16px;
+                        border: 1px solid #e0e0e0;
+                        background: #ffffff;
+                        color: #1d4e89;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                    ">📥 Export Data</button>
+                    <button style="
+                        padding: 8px 16px;
+                        background: #1d4e89;
+                        color: #ffffff;
+                        border: none;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                    ">➕ Quick Action</button>
+                </div>
+            </div>
+
+            <!-- Statistics Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-bottom: 32px;">
+                <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px;">
+                    <div style="display: flex; align-items: center;">
+                        <span style="font-size: 32px; margin-right: 16px; color: #000000;">👥</span>
+                        <div>
+                            <p style="color: #607d8b; margin: 0; font-size: 14px;">Total Students</p>
+                            <p style="font-size: 24px; font-weight: bold; margin: 4px 0 0 0; color: #1d4e89;">2,847</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px;">
+                    <div style="display: flex; align-items: center;">
+                        <span style="font-size: 32px; margin-right: 16px; color: #4caf50;">🎓</span>
+                        <div>
+                            <p style="color: #607d8b; margin: 0; font-size: 14px;">Active Courses</p>
+                            <p style="font-size: 24px; font-weight: bold; margin: 4px 0 0 0; color: #4caf50;">42</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px;">
+                    <div style="display: flex; align-items: center;">
+                        <span style="font-size: 32px; margin-right: 16px; color: #ff9800;">💳</span>
+                        <div>
+                            <p style="color: #607d8b; margin: 0; font-size: 14px;">Fee Collection</p>
+                            <p style="font-size: 24px; font-weight: bold; margin: 4px 0 0 0; color: #ff9800;">₹89.2L</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px;">
+                    <div style="display: flex; align-items: center;">
+                        <span style="font-size: 32px; margin-right: 16px; color: #f44336;">🏢</span>
+                        <div>
+                            <p style="color: #607d8b; margin: 0; font-size: 14px;">Hostel Occupancy</p>
+                            <p style="font-size: 24px; font-weight: bold; margin: 4px 0 0 0; color: #f44336;">87%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px; margin-bottom: 32px;">
+                <h3 style="font-size: 1.5rem; font-weight: bold; color: #1d4e89; margin: 0 0 8px 0;">Quick Actions</h3>
+                <p style="color: #607d8b; margin: 0 0 24px 0; font-size: 14px;">
+                    Frequently used actions for daily operations
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                    ${navigationItems.slice(1).map(item => `
+                        <button data-route="${item.href}" style="
+                            display: flex;
+                            align-items: center;
+                            padding: 16px;
+                            border: 1px solid #e0e0e0;
+                            border-radius: 8px;
+                            background: #ffffff;
+                            cursor: pointer;
+                            transition: background-color 0.2s;
+                            text-align: left;
+                        " onmouseover="this.style.backgroundColor='#f4f9fc'" onmouseout="this.style.backgroundColor='#ffffff'">
+                            <span style="font-size: 32px; margin-right: 16px;">${item.icon}</span>
+                            <div>
+                                <h4 style="margin: 0; font-weight: 600; color: #1d4e89;">${item.name}</h4>
+                                <p style="margin: 4px 0 0 0; font-size: 14px; color: #607d8b;">Manage ${item.name.toLowerCase()}</p>
+                            </div>
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+
+            <!-- Recent Activities and System Status -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px;">
+                <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px;">
+                    <h3 style="font-size: 1.5rem; font-weight: bold; color: #1d4e89; margin: 0 0 24px 0;">Recent Activities</h3>
+                    <div style="space-y: 16px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                            <div style="width: 8px; height: 8px; background: #4caf50; border-radius: 50%; margin-right: 12px;"></div>
+                            <div style="flex: 1;">
+                                <p style="margin: 0; font-weight: 600; font-size: 14px;">New admission approved</p>
+                                <p style="margin: 2px 0 0 0; font-size: 12px; color: #607d8b;">Sarah Johnson - B.Tech CS</p>
+                            </div>
+                            <p style="font-size: 12px; color: #607d8b; margin: 0;">2 min ago</p>
+                        </div>
+                        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                            <div style="width: 8px; height: 8px; background: #ff9800; border-radius: 50%; margin-right: 12px;"></div>
+                            <div style="flex: 1;">
+                                <p style="margin: 0; font-weight: 600; font-size: 14px;">Fee payment received</p>
+                                <p style="margin: 2px 0 0 0; font-size: 12px; color: #607d8b;">₹2,85,000 - Michael Chen</p>
+                            </div>
+                            <p style="font-size: 12px; color: #607d8b; margin: 0;">15 min ago</p>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 8px; height: 8px; background: #1d4e89; border-radius: 50%; margin-right: 12px;"></div>
+                            <div style="flex: 1;">
+                                <p style="margin: 0; font-weight: 600; font-size: 14px;">Exam schedule updated</p>
+                                <p style="margin: 2px 0 0 0; font-size: 12px; color: #607d8b;">Final exams - December 2024</p>
+                            </div>
+                            <p style="font-size: 12px; color: #607d8b; margin: 0;">1 hour ago</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #ffffff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 24px;">
+                    <h3 style="font-size: 1.5rem; font-weight: bold; color: #1d4e89; margin: 0 0 24px 0;">System Status</h3>
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <span style="font-weight: 600; font-size: 14px;">Database</span>
+                            <div style="display: flex; align-items: center;">
+                                <div style="width: 8px; height: 8px; background: #4caf50; border-radius: 50%; margin-right: 8px;"></div>
+                                <span style="font-size: 14px; color: #4caf50;">Online</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <span style="font-weight: 600; font-size: 14px;">Payment Gateway</span>
+                            <div style="display: flex; align-items: center;">
+                                <div style="width: 8px; height: 8px; background: #4caf50; border-radius: 50%; margin-right: 8px;"></div>
+                                <span style="font-size: 14px; color: #4caf50;">Active</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                            <span style="font-weight: 600; font-size: 14px;">Email Service</span>
+                            <div style="display: flex; align-items: center;">
+                                <div style="width: 8px; height: 8px; background: #ff9800; border-radius: 50%; margin-right: 8px;"></div>
+                                <span style="font-size: 14px; color: #ff9800;">Limited</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 600; font-size: 14px;">Backup Status</span>
+                            <div style="display: flex; align-items: center;">
+                                <div style="width: 8px; height: 8px; background: #4caf50; border-radius: 50%; margin-right: 8px;"></div>
+                                <span style="font-size: 14px; color: #4caf50;">Up to date</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Simple page template for other sections
+function createSimplePage(title, description, icon) {
+    return `
+        <div style="padding: 24px; max-width: 1200px; margin: 0 auto;">
+            <div style="text-align: center; padding: 60px 20px;">
+                <div style="font-size: 72px; margin-bottom: 24px;">${navigationItems.find(item => item.name === title)?.icon || '📋'}</div>
+                <h1 style="font-size: 2.5rem; font-weight: bold; color: #1d4e89; margin: 0 0 16px 0;">${title}</h1>
+                <p style="font-size: 1.2rem; color: #607d8b; max-width: 600px; margin: 0 auto 32px auto;">
+                    ${description}
+                </p>
+                <button style="
+                    padding: 12px 24px;
+                    background: #1d4e89;
+                    color: #ffffff;
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 16px;
+                ">Coming Soon</button>
+            </div>
+        </div>
+    `;
+}
+
+// Create router instance
+const router = new Router();
+
 // Main JavaScript functionality
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize the application
     initializeApp();
 });
 
@@ -11,30 +315,21 @@ function initializeApp() {
     // Initialize mobile menu
     initializeMobileMenu();
     
-    // Initialize chatbot
-    initializeChatbot();
-    
-    // Initialize SMS modal
-    initializeSMSModal();
-    
     // Register routes
     registerRoutes();
     
     // Start router
     router.start();
-    
-    // Initialize Lucide icons
-    initializeLucideIcons();
 }
 
 function initializeNavigation() {
     // Populate desktop navigation
-    const navItems = document.getElementById('nav-items');
-    navItems.innerHTML = createNavigationItems();
+    const navItems = document.getElementById('navigation-items');
+    if (navItems) navItems.innerHTML = createNavigationItems();
     
     // Populate mobile navigation
-    const mobileNavItems = document.getElementById('mobile-nav-items');
-    mobileNavItems.innerHTML = createNavigationItems();
+    const mobileNavItems = document.getElementById('mobile-navigation-items');
+    if (mobileNavItems) mobileNavItems.innerHTML = createNavigationItems();
     
     // Add click handlers for navigation
     document.addEventListener('click', function(e) {
@@ -44,368 +339,101 @@ function initializeNavigation() {
             router.navigate(route);
             
             // Close mobile menu if open
-            closeMobileMenu();
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu && mobileMenu.style.display === 'block') {
+                document.body.classList.remove('mobile-menu-open');
+                setTimeout(() => {
+                    mobileMenu.style.display = 'none';
+                }, 300);
+            }
         }
     });
 }
 
 function initializeMobileMenu() {
-    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
-    const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
-    const mobileNavBackdrop = document.getElementById('mobile-nav-backdrop');
-    const mobileNavContent = document.getElementById('mobile-nav-content');
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileClose = document.getElementById('mobile-close');
     
-    mobileMenuToggle.addEventListener('click', function() {
-        openMobileMenu();
-    });
-    
-    mobileNavBackdrop.addEventListener('click', function() {
-        closeMobileMenu();
-    });
-}
-
-function openMobileMenu() {
-    const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
-    const mobileNavContent = document.getElementById('mobile-nav-content');
-    
-    mobileNavOverlay.classList.remove('hidden');
-    setTimeout(() => {
-        mobileNavContent.classList.add('nav-slide-in');
-    }, 10);
-}
-
-function closeMobileMenu() {
-    const mobileNavOverlay = document.getElementById('mobile-nav-overlay');
-    const mobileNavContent = document.getElementById('mobile-nav-content');
-    
-    mobileNavContent.classList.remove('nav-slide-in');
-    setTimeout(() => {
-        mobileNavOverlay.classList.add('hidden');
-    }, 300);
-}
-
-function initializeChatbot() {
-    const chatbotToggle = document.getElementById('chatbot-toggle');
-    const chatbotWindow = document.getElementById('chatbot-window');
-    const chatInput = document.getElementById('chat-input');
-    const chatSend = document.getElementById('chat-send');
-    const chatMessages = document.getElementById('chat-messages');
-    
-    let isChatbotOpen = false;
-    
-    // FAQ responses
-    const faqs = {
-        'admission': 'For admissions, please visit our Admissions office or check the requirements on our website. Application deadline is usually in June.',
-        'fees': 'Fee structure varies by course. B.Tech is ₹2,85,000 per year. You can pay online or visit the Finance office.',
-        'hostel': 'Hostel accommodation is available for ₹25,000 per year. Contact the Hostel office for room allocation.',
-        'library': 'Library is open 9 AM to 9 PM. You can borrow up to 3 books for 30 days each.',
-        'attendance': 'Minimum 75% attendance is required. Check with your faculty for specific requirements.',
-        'examination': 'Exam schedules are published 2 weeks in advance. Check the Examinations section.',
-        'contact': 'Main office: +91-XXX-XXXXXXX, Email: info@college.edu',
-        'hours': 'College hours: 9 AM to 5 PM, Monday to Friday. Saturday: 9 AM to 2 PM.'
-    };
-    
-    function getBotResponse(userMessage) {
-        const message = userMessage.toLowerCase();
-        
-        for (const [key, response] of Object.entries(faqs)) {
-            if (message.includes(key)) {
-                return response;
-            }
-        }
-        
-        if (message.includes('hello') || message.includes('hi')) {
-            return 'Hello! I can help you with questions about admissions, fees, hostel, library, attendance, and examinations. What would you like to know?';
-        }
-        
-        return 'I can help you with questions about admissions, fees, hostel, library, attendance, and examinations. Could you please rephrase your question?';
+    if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener('click', function() {
+            mobileMenu.style.display = 'block';
+            document.body.classList.add('mobile-menu-open');
+        });
     }
     
-    function addMessage(text, isBot = false) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `flex ${isBot ? 'justify-start' : 'justify-end'}`;
-        
-        messageDiv.innerHTML = `
-            <div class="flex items-start space-x-2 max-w-[80%] ${isBot ? 'flex-row' : 'flex-row-reverse space-x-reverse'}">
-                <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 ${
-                    isBot ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground'
-                }">
-                    <i data-lucide="${isBot ? 'bot' : 'user'}" class="h-3 w-3"></i>
-                </div>
-                <div class="rounded-lg p-2 text-sm ${
-                    isBot ? 'bg-muted text-foreground' : 'bg-primary text-primary-foreground'
-                }">
-                    ${text}
-                </div>
-            </div>
-        `;
-        
-        chatMessages.appendChild(messageDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-        
-        // Re-initialize icons for new message
-        setTimeout(() => initializeLucideIcons(), 10);
+    if (mobileClose && mobileMenu) {
+        mobileClose.addEventListener('click', function() {
+            document.body.classList.remove('mobile-menu-open');
+            setTimeout(() => {
+                mobileMenu.style.display = 'none';
+            }, 300);
+        });
     }
     
-    function sendMessage() {
-        const message = chatInput.value.trim();
-        if (!message) return;
-        
-        // Add user message
-        addMessage(message, false);
-        
-        // Add bot response
-        setTimeout(() => {
-            const response = getBotResponse(message);
-            addMessage(response, true);
-        }, 500);
-        
-        chatInput.value = '';
-    }
-    
-    chatbotToggle.addEventListener('click', function() {
-        isChatbotOpen = !isChatbotOpen;
-        
-        if (isChatbotOpen) {
-            chatbotWindow.classList.remove('hidden');
-            chatbotToggle.innerHTML = '<i data-lucide="x" class="h-6 w-6"></i>';
-        } else {
-            chatbotWindow.classList.add('hidden');
-            chatbotToggle.innerHTML = '<i data-lucide="message-circle" class="h-6 w-6"></i>';
-        }
-        
-        initializeLucideIcons();
-    });
-    
-    chatSend.addEventListener('click', sendMessage);
-    
-    chatInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            sendMessage();
-        }
-    });
-    
-    // Quick topic buttons
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('chat-quick-btn')) {
-            const topic = e.target.getAttribute('data-topic');
-            chatInput.value = `Tell me about ${topic}`;
-        }
-    });
-}
-
-function initializeSMSModal() {
-    const smsButton = document.getElementById('sms-button');
-    const smsModal = document.getElementById('sms-modal');
-    
-    // Mock student data
-    const students = [
-        { id: 'ST2024001', name: 'Sarah Johnson', phone: '+1-555-0123', course: 'B.Tech CS' },
-        { id: 'ST2024002', name: 'Michael Chen', phone: '+1-555-0124', course: 'B.Tech CS' },
-        { id: 'ST2024003', name: 'Emily Rodriguez', phone: '+1-555-0125', course: 'B.Tech ME' },
-        { id: 'ST2024004', name: 'David Wilson', phone: '+1-555-0126', course: 'MBA' },
-        { id: 'ST2024005', name: 'Lisa Brown', phone: '+1-555-0127', course: 'B.Tech EE' }
-    ];
-    
-    let selectedStudents = [];
-    let recipientType = 'individual';
-    
-    smsButton.addEventListener('click', function() {
-        // Create and show modal
-        smsModal.innerHTML = createSMSModal();
-        smsModal.classList.remove('hidden');
-        
-        // Initialize modal functionality
-        initializeSMSModalHandlers();
-        initializeLucideIcons();
-    });
-    
-    function initializeSMSModalHandlers() {
-        const smsClose = document.getElementById('sms-close');
-        const individualBtn = document.getElementById('individual-btn');
-        const groupBtn = document.getElementById('group-btn');
-        const individualSection = document.getElementById('individual-section');
-        const groupSection = document.getElementById('group-section');
-        const studentSearch = document.getElementById('student-search');
-        const studentList = document.getElementById('student-list');
-        const smsMessage = document.getElementById('sms-message');
-        const charCount = document.getElementById('char-count');
-        const sendSmsBtn = document.getElementById('send-sms-btn');
-        
-        // Close modal
-        smsClose.addEventListener('click', function() {
-            smsModal.classList.add('hidden');
-        });
-        
-        // Modal backdrop click
-        smsModal.addEventListener('click', function(e) {
-            if (e.target === smsModal) {
-                smsModal.classList.add('hidden');
+    // Close menu when clicking outside
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', function(e) {
+            if (e.target === mobileMenu) {
+                document.body.classList.remove('mobile-menu-open');
+                setTimeout(() => {
+                    mobileMenu.style.display = 'none';
+                }, 300);
             }
         });
-        
-        // Recipient type toggle
-        document.querySelectorAll('.recipient-type-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const type = this.getAttribute('data-type');
-                recipientType = type;
-                
-                // Update button styles
-                document.querySelectorAll('.recipient-type-btn').forEach(b => {
-                    b.className = b.className.replace('bg-primary text-primary-foreground hover:bg-primary/90', 'border border-input bg-background hover:bg-accent hover:text-accent-foreground');
-                });
-                this.className = this.className.replace('border border-input bg-background hover:bg-accent hover:text-accent-foreground', 'bg-primary text-primary-foreground hover:bg-primary/90');
-                
-                // Show/hide sections
-                if (type === 'individual') {
-                    individualSection.classList.remove('hidden');
-                    groupSection.classList.add('hidden');
-                } else {
-                    individualSection.classList.add('hidden');
-                    groupSection.classList.remove('hidden');
-                }
-            });
-        });
-        
-        // Character count
-        smsMessage.addEventListener('input', function() {
-            const count = this.value.length;
-            charCount.textContent = `${count}/160`;
-        });
-        
-        // Populate student list
-        function renderStudentList(filteredStudents = students) {
-            studentList.innerHTML = filteredStudents.map(student => `
-                <div class="flex items-center justify-between p-2 rounded cursor-pointer hover:bg-accent ${
-                    selectedStudents.includes(student.id) ? 'bg-primary/10 border border-primary' : ''
-                }" data-student-id="${student.id}">
-                    <div>
-                        <p class="font-medium text-sm">${student.name}</p>
-                        <p class="text-xs text-muted-foreground">${student.id} • ${student.course}</p>
-                    </div>
-                    <input type="checkbox" ${selectedStudents.includes(student.id) ? 'checked' : ''} class="rounded">
-                </div>
-            `).join('');
-            
-            // Add click handlers for student selection
-            studentList.querySelectorAll('[data-student-id]').forEach(item => {
-                item.addEventListener('click', function() {
-                    const studentId = this.getAttribute('data-student-id');
-                    
-                    if (selectedStudents.includes(studentId)) {
-                        selectedStudents = selectedStudents.filter(id => id !== studentId);
-                    } else {
-                        selectedStudents.push(studentId);
-                    }
-                    
-                    renderStudentList(getCurrentFilteredStudents());
-                });
-            });
-        }
-        
-        // Search students
-        function getCurrentFilteredStudents() {
-            const searchTerm = studentSearch.value.toLowerCase();
-            return students.filter(student =>
-                student.name.toLowerCase().includes(searchTerm) ||
-                student.id.toLowerCase().includes(searchTerm)
-            );
-        }
-        
-        studentSearch.addEventListener('input', function() {
-            renderStudentList(getCurrentFilteredStudents());
-        });
-        
-        // Send SMS
-        sendSmsBtn.addEventListener('click', function() {
-            const message = smsMessage.value.trim();
-            
-            if (!message) {
-                alert('Please enter a message');
-                return;
-            }
-            
-            if (recipientType === 'individual' && selectedStudents.length === 0) {
-                alert('Please select at least one student');
-                return;
-            }
-            
-            // Simulate sending SMS
-            console.log('Sending SMS:', {
-                type: recipientType,
-                recipients: recipientType === 'individual' ? selectedStudents : 'group',
-                message: message
-            });
-            
-            alert('SMS sent successfully!');
-            smsModal.classList.add('hidden');
-            
-            // Reset form
-            selectedStudents = [];
-            recipientType = 'individual';
-        });
-        
-        // Initialize student list
-        renderStudentList();
     }
 }
 
-// Initialize Lucide icons
 function registerRoutes() {
     // Register all routes
     router.register('/', function() {
-        document.getElementById('page-content').innerHTML = createDashboardPage();
-        initializeLucideIcons();
+        document.getElementById('main-content').innerHTML = createDashboardPage();
     });
     
     router.register('/admissions', function() {
-        document.getElementById('page-content').innerHTML = createAdmissionsPage();
-        initializeLucideIcons();
+        document.getElementById('main-content').innerHTML = createSimplePage('Admissions', 'Manage student applications and enrollment process', '👥');
     });
     
     router.register('/finance', function() {
-        document.getElementById('page-content').innerHTML = createSimplePage('Finance', 'Manage student fees, payments and financial records', 'credit-card');
-        initializeLucideIcons();
+        document.getElementById('main-content').innerHTML = createSimplePage('Finance', 'Manage student fees, payments and financial records', '💳');
     });
     
     router.register('/attendance', function() {
-        document.getElementById('page-content').innerHTML = createSimplePage('Attendance', 'Track and manage student attendance records', 'clipboard-check');
-        initializeLucideIcons();
+        document.getElementById('main-content').innerHTML = createSimplePage('Attendance', 'Track and manage student attendance records', '✅');
     });
     
     router.register('/hostel', function() {
-        document.getElementById('page-content').innerHTML = createSimplePage('Hostel', 'Manage hostel accommodations, room allocation and facilities', 'building');
-        initializeLucideIcons();
+        document.getElementById('main-content').innerHTML = createSimplePage('Hostel', 'Manage hostel accommodations, room allocation and facilities', '🏢');
     });
     
     router.register('/library', function() {
-        document.getElementById('page-content').innerHTML = createSimplePage('Library', 'Manage library resources, book inventory and rentals', 'library');
-        initializeLucideIcons();
+        document.getElementById('main-content').innerHTML = createSimplePage('Library', 'Manage library resources, book inventory and rentals', '📚');
     });
     
     router.register('/examinations', function() {
-        document.getElementById('page-content').innerHTML = createSimplePage('Examinations', 'Manage exam schedules, results and academic assessments', 'graduation-cap');
-        initializeLucideIcons();
+        document.getElementById('main-content').innerHTML = createSimplePage('Examinations', 'Manage exam schedules, results and academic assessments', '🎓');
     });
     
     router.register('/reports', function() {
-        document.getElementById('page-content').innerHTML = createSimplePage('Reports', 'Generate and view comprehensive analytics and reports', 'bar-chart-3');
-        initializeLucideIcons();
+        document.getElementById('main-content').innerHTML = createSimplePage('Reports', 'Generate and view comprehensive analytics and reports', '📈');
     });
     
     // 404 fallback
     router.register('*', function() {
-        document.getElementById('page-content').innerHTML = `
-            <div class="flex min-h-[50vh] items-center justify-center">
-                <div class="text-center">
-                    <h1 class="mb-4 text-4xl font-bold">404</h1>
-                    <p class="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>
-                    <button data-route="/" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-                        Return to Dashboard
-                    </button>
-                </div>
+        document.getElementById('main-content').innerHTML = `
+            <div style="text-align: center; padding: 60px 20px;">
+                <h1 style="font-size: 4rem; font-weight: bold; color: #1d4e89; margin: 0 0 16px 0;">404</h1>
+                <p style="font-size: 1.5rem; color: #607d8b; margin: 0 0 32px 0;">Oops! Page not found</p>
+                <button data-route="/" style="
+                    padding: 12px 24px;
+                    background: #1d4e89;
+                    color: #ffffff;
+                    border: none;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    font-size: 16px;
+                ">Return to Dashboard</button>
             </div>
         `;
-        initializeLucideIcons();
     });
 }

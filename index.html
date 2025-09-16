@@ -3,240 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampusFusion - College ERP System</title>
-    <meta name="description" content="CampusFusion - Complete College ERP System for managing admissions, finance, attendance, hostel, library, examinations and reports">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-    
-    <!-- Custom Styles -->
+    <title>CampusFusion - College Management System</title>
+    <meta name="description" content="CampusFusion - Complete College Management System for managing admissions, finance, attendance, hostel, library, examinations and reports">
     <link rel="stylesheet" href="css/styles.css">
-    
-    <!-- Tailwind Config -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                container: {
-                    center: true,
-                    padding: "2rem",
-                    screens: {
-                        "2xl": "1400px",
-                    },
-                },
-                extend: {
-                    fontFamily: {
-                        roboto: ['Roboto', 'sans-serif'],
-                    },
-                    colors: {
-                        border: "hsl(var(--border))",
-                        input: "hsl(var(--input))",
-                        ring: "hsl(var(--ring))",
-                        background: "hsl(var(--background))",
-                        foreground: "hsl(var(--foreground))",
-                        primary: {
-                            DEFAULT: "hsl(var(--primary))",
-                            foreground: "hsl(var(--primary-foreground))",
-                        },
-                        secondary: {
-                            DEFAULT: "hsl(var(--secondary))",
-                            foreground: "hsl(var(--secondary-foreground))",
-                        },
-                        destructive: {
-                            DEFAULT: "hsl(var(--destructive))",
-                            foreground: "hsl(var(--destructive-foreground))",
-                        },
-                        muted: {
-                            DEFAULT: "hsl(var(--muted))",
-                            foreground: "hsl(var(--muted-foreground))",
-                        },
-                        accent: {
-                            DEFAULT: "hsl(var(--accent))",
-                            foreground: "hsl(var(--accent-foreground))",
-                        },
-                        popover: {
-                            DEFAULT: "hsl(var(--popover))",
-                            foreground: "hsl(var(--popover-foreground))",
-                        },
-                        card: {
-                            DEFAULT: "hsl(var(--card))",
-                            foreground: "hsl(var(--card-foreground))",
-                        },
-                        success: {
-                            DEFAULT: "hsl(var(--success))",
-                            foreground: "hsl(var(--success-foreground))",
-                        },
-                        warning: {
-                            DEFAULT: "hsl(var(--warning))",
-                            foreground: "hsl(var(--warning-foreground))",
-                        },
-                    },
-                    borderRadius: {
-                        lg: "var(--radius)",
-                        md: "calc(var(--radius) - 2px)",
-                        sm: "calc(var(--radius) - 4px)",
-                    },
-                    keyframes: {
-                        "accordion-down": {
-                            from: { height: "0" },
-                            to: { height: "var(--radix-accordion-content-height)" },
-                        },
-                        "accordion-up": {
-                            from: { height: "var(--radix-accordion-content-height)" },
-                            to: { height: "0" },
-                        },
-                        "fade-in": {
-                            from: { opacity: "0", transform: "translateY(10px)" },
-                            to: { opacity: "1", transform: "translateY(0)" },
-                        },
-                    },
-                    animation: {
-                        "accordion-down": "accordion-down 0.2s ease-out",
-                        "accordion-up": "accordion-up 0.2s ease-out",
-                        "fade-in": "fade-in 0.2s ease-out",
-                    },
-                },
-            },
-        }
-    </script>
 </head>
-<body class="font-roboto min-h-screen bg-background">
-    <!-- Top Navigation -->
-    <header class="sticky top-0 z-50 border-b border-border bg-card shadow-sm">
-        <div class="mx-auto max-w-full px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <!-- Mobile Menu Toggle -->
-                    <button id="mobile-menu-toggle" class="md:hidden inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
-                        <i data-lucide="menu" class="h-5 w-5"></i>
-                    </button>
-                    
-                    <div class="flex-shrink-0">
-                        <h1 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                            CampusFusion
-                        </h1>
-                        <p class="text-xs text-muted-foreground hidden sm:block">College ERP System</p>
-                    </div>
-                </div>
-                
-                <div class="flex items-center space-x-2 sm:space-x-4">
-                    <button id="sms-button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 hover:bg-primary/10">
-                        <i data-lucide="message-square" class="h-4 w-4"></i>
-                        <span class="sr-only">Messages</span>
-                    </button>
-                    <button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3">
-                        <i data-lucide="settings" class="h-4 w-4"></i>
-                        <span class="sr-only">Settings</span>
-                    </button>
-                    <div class="flex items-center space-x-2">
-                        <div class="relative flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 overflow-hidden rounded-full">
-                            <div class="flex h-full w-full items-center justify-center rounded-full bg-muted">AD</div>
-                        </div>
-                        <div class="text-sm hidden sm:block">
-                            <p class="font-medium text-foreground">Administrator</p>
-                            <p class="text-muted-foreground text-xs">admin@college.edu</p>
-                        </div>
-                    </div>
-                </div>
+<body style="margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background-color: #f4f9fc;">
+    <!-- Main Layout -->
+    <div style="display: flex; min-height: 100vh;">
+        <!-- Sidebar -->
+        <aside style="
+            width: 280px;
+            background-color: #005f73;
+            color: #ffffff;
+            padding: 24px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 10;
+            box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+        ">
+            <!-- Logo -->
+            <div style="padding: 0 24px 32px 24px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                <h1 style="
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    margin: 0;
+                    color: #ffffff;
+                ">CampusFusion</h1>
+                <p style="
+                    font-size: 0.875rem;
+                    color: rgba(255,255,255,0.8);
+                    margin: 4px 0 0 0;
+                ">Management System</p>
             </div>
-        </div>
-    </header>
-
-    <div class="flex">
-        <!-- Desktop Side Navigation -->
-        <nav id="desktop-nav" class="hidden md:block w-64 bg-card border-r border-border min-h-[calc(100vh-4rem)] sticky top-16">
-            <div class="p-4">
-                <div id="nav-items" class="space-y-2">
-                    <!-- Navigation items will be inserted here by JavaScript -->
+            
+            <!-- Navigation -->
+            <nav style="padding: 24px 16px;">
+                <div id="navigation-items">
+                    <!-- Navigation items will be populated by JavaScript -->
                 </div>
-            </div>
-        </nav>
-
-        <!-- Mobile Side Navigation Overlay -->
-        <div id="mobile-nav-overlay" class="fixed inset-0 z-50 hidden md:hidden">
-            <div class="fixed inset-0 bg-black/50" id="mobile-nav-backdrop"></div>
-            <div class="fixed left-0 top-0 h-full w-64 bg-card border-r border-border p-4 transform -translate-x-full transition-transform duration-300" id="mobile-nav-content">
-                <div class="mb-6">
-                    <h1 class="text-xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                        CampusFusion
-                    </h1>
-                    <p class="text-xs text-muted-foreground">College ERP System</p>
-                </div>
-                <div id="mobile-nav-items" class="space-y-2">
-                    <!-- Navigation items will be inserted here by JavaScript -->
-                </div>
-            </div>
-        </div>
+            </nav>
+        </aside>
 
         <!-- Main Content -->
-        <main class="flex-1 p-4 sm:p-6 lg:p-8 min-h-[calc(100vh-4rem)] w-full max-w-full overflow-x-hidden">
-            <div id="page-content">
-                <!-- Page content will be loaded here -->
+        <main style="
+            flex: 1;
+            margin-left: 280px;
+            background-color: #f4f9fc;
+            min-height: 100vh;
+        ">
+            <!-- Header -->
+            <header style="
+                background: #ffffff;
+                border-bottom: 1px solid #e0e0e0;
+                padding: 16px 24px;
+                position: sticky;
+                top: 0;
+                z-index: 5;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            ">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <!-- Mobile Menu Toggle (Hidden on Desktop) -->
+                    <button id="mobile-toggle" style="
+                        display: none;
+                        background: #1d4e89;
+                        color: #ffffff;
+                        border: none;
+                        border-radius: 6px;
+                        padding: 8px 12px;
+                        cursor: pointer;
+                        font-size: 1.2rem;
+                        margin-right: 16px;
+                    ">☰</button>
+                    
+                    <div style="flex: 1;">
+                        <h2 style="
+                            font-size: 1.25rem;
+                            font-weight: 600;
+                            color: #1d4e89;
+                            margin: 0;
+                        ">College Management Dashboard</h2>
+                    </div>
+                    
+                    <!-- Search Bar -->
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <input 
+                            type="search" 
+                            placeholder="Search..." 
+                            style="
+                                padding: 8px 16px;
+                                border: 1px solid #cfd8e1;
+                                border-radius: 6px;
+                                background: #ffffff;
+                                color: #1d4e89;
+                                width: 200px;
+                                font-size: 14px;
+                            "
+                        />
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <button style="
+                                background: none;
+                                border: 1px solid #e0e0e0;
+                                color: #1d4e89;
+                                border-radius: 6px;
+                                padding: 8px;
+                                cursor: pointer;
+                                font-size: 16px;
+                            ">⚙️</button>
+                            <div style="
+                                width: 32px;
+                                height: 32px;
+                                background: #1d4e89;
+                                color: #ffffff;
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-weight: bold;
+                                font-size: 12px;
+                            ">AD</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content -->
+            <div id="main-content" style="flex: 1; min-height: calc(100vh - 100px);">
+                <!-- Content will be populated by JavaScript -->
             </div>
+
+            <!-- Footer -->
+            <footer style="
+                background: #ffffff;
+                border-top: 1px solid #e0e0e0;
+                padding: 24px;
+                text-align: center;
+                color: #607d8b;
+                font-size: 0.875rem;
+                margin-top: auto;
+            ">
+                <p style="margin: 0;">© 2024 CampusFusion. All rights reserved.</p>
+            </footer>
         </main>
     </div>
 
-    <!-- Chatbot Widget -->
-    <div class="fixed bottom-6 right-6 z-50">
-        <button id="chatbot-toggle" class="w-14 h-14 rounded-full shadow-lg hover:scale-110 transition-all duration-200 inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90">
-            <i data-lucide="message-circle" class="h-6 w-6"></i>
-        </button>
-    </div>
-
-    <!-- Chatbot Window -->
-    <div id="chatbot-window" class="fixed bottom-24 right-6 w-80 h-96 z-50 animate-fade-in hidden">
-        <div class="h-full shadow-2xl rounded-lg border bg-card text-card-foreground">
-            <div class="flex flex-col space-y-1.5 p-6 bg-gradient-to-r from-primary to-secondary text-white rounded-t-lg">
-                <h3 class="text-lg font-semibold leading-none tracking-tight flex items-center">
-                    <i data-lucide="bot" class="mr-2 h-5 w-5"></i>
-                    CampusFusion Assistant
-                </h3>
-            </div>
-            <div class="flex flex-col h-full p-0">
-                <!-- Messages Area -->
-                <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3">
-                    <div class="flex justify-start">
-                        <div class="flex items-start space-x-2 max-w-[80%] flex-row">
-                            <div class="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 bg-primary text-primary-foreground">
-                                <i data-lucide="bot" class="h-3 w-3"></i>
-                            </div>
-                            <div class="rounded-lg p-2 text-sm bg-muted text-foreground">
-                                Hello! I'm the CampusFusion assistant. How can I help you today?
-                            </div>
-                        </div>
-                    </div>
+    <!-- Mobile Menu Overlay (Hidden by default) -->
+    <div id="mobile-menu" style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0,0.5);
+        z-index: 20;
+    ">
+        <div style="
+            width: 280px;
+            height: 100vh;
+            background: #005f73;
+            color: #ffffff;
+            padding: 24px 0;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        " id="mobile-menu-content">
+            <div style="padding: 0 24px 32px 24px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h1 style="font-size: 1.5rem; font-weight: bold; margin: 0; color: #ffffff;">CampusFusion</h1>
+                    <button id="mobile-close" style="
+                        background: none;
+                        border: none;
+                        color: #ffffff;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                        padding: 4px;
+                    ">×</button>
                 </div>
-
-                <!-- Input Area -->
-                <div class="border-t p-4">
-                    <div class="flex space-x-2">
-                        <input id="chat-input" type="text" placeholder="Ask me anything..." class="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-1">
-                        <button id="chat-send" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 h-10 w-10">
-                            <i data-lucide="send" class="h-4 w-4"></i>
-                        </button>
-                    </div>
-                    <div class="flex flex-wrap gap-1 mt-2">
-                        <button class="chat-quick-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-xs h-6" data-topic="admissions">Admissions</button>
-                        <button class="chat-quick-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-xs h-6" data-topic="fees">Fees</button>
-                        <button class="chat-quick-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-xs h-6" data-topic="hostel">Hostel</button>
-                        <button class="chat-quick-btn inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground text-xs h-6" data-topic="library">Library</button>
-                    </div>
-                </div>
+                <p style="
+                    font-size: 0.875rem;
+                    color: rgba(255,255,255,0.8);
+                    margin: 4px 0 0 0;
+                ">Management System</p>
             </div>
+            <nav style="padding: 24px 16px;" id="mobile-navigation-items">
+                <!-- Mobile navigation items will be populated by JavaScript -->
+            </nav>
         </div>
     </div>
 
-    <!-- SMS Modal -->
-    <div id="sms-modal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 hidden">
-        <!-- SMS Modal content will be inserted by JavaScript -->
-    </div>
+    <!-- Floating Action Button -->
+    <button id="fab-button" style="
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 56px;
+        height: 56px;
+        background: #1d4e89;
+        color: #ffffff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.5rem;
+        box-shadow: 0 4px 12px rgba(29, 78, 137, 0.3);
+        z-index: 10;
+        transition: transform 0.2s ease;
+    " 
+    onmouseover="this.style.transform='scale(1.1)'" 
+    onmouseout="this.style.transform='scale(1)'">+</button>
 
-    <!-- Scripts -->
-    <script src="js/router.js"></script>
-    <script src="js/components.js"></script>
+    <!-- Mobile Responsive Styles -->
+    <style>
+        @media (max-width: 768px) {
+            aside {
+                display: none !important;
+            }
+            
+            main {
+                margin-left: 0 !important;
+            }
+            
+            #mobile-toggle {
+                display: block !important;
+            }
+            
+            header h2 {
+                font-size: 1rem !important;
+            }
+            
+            header input {
+                width: 150px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                padding: 12px 16px !important;
+            }
+            
+            header input {
+                width: 120px !important;
+                font-size: 12px !important;
+            }
+            
+            #main-content {
+                padding: 16px !important;
+            }
+            
+            #fab-button {
+                width: 48px !important;
+                height: 48px !important;
+                font-size: 1.2rem !important;
+            }
+        }
+        
+        .mobile-menu-open #mobile-menu-content {
+            transform: translateX(0) !important;
+        }
+        
+        /* Smooth transitions */
+        * {
+            box-sizing: border-box;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+        }
+        
+        input:focus {
+            outline: 2px solid #1d4e89;
+            outline-offset: 2px;
+        }
+    </style>
+
     <script src="js/main.js"></script>
 </body>
 </html>
