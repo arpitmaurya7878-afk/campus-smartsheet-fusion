@@ -350,6 +350,7 @@ function initializeSMSModal() {
     }
 }
 
+// Initialize Lucide icons
 function registerRoutes() {
     // Register all routes
     router.register('/', function() {
