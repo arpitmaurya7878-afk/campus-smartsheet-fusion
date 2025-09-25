@@ -1,29 +1,281 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CampusFusion - College ERP System</title>
-    <meta name="description" content="CampusFusion - Comprehensive College ERP System for managing admissions, finance, hostel, and examinations" />
-    <meta name="author" content="CampusFusion College ERP" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusFusion - College Management System</title>
+    <meta name="description" content="CampusFusion - Complete College Management System for managing admissions, finance, attendance, hostel, library, examinations and reports">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body style="margin: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background-color: #f4f9fc;">
+    <!-- Main Layout -->
+    <div style="display: flex; min-height: 100vh;">
+        <!-- Sidebar -->
+        <aside style="
+            width: 280px;
+            background-color: #005f73;
+            color: #ffffff;
+            padding: 24px 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 10;
+            box-shadow: 2px 0 4px rgba(0,0,0,0.1);
+        ">
+            <!-- Logo -->
+            <div style="padding: 0 24px 32px 24px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                <h1 style="
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    margin: 0;
+                    color: #ffffff;
+                ">CampusFusion</h1>
+                <p style="
+                    font-size: 0.875rem;
+                    color: rgba(255,255,255,0.8);
+                    margin: 4px 0 0 0;
+                ">Management System</p>
+            </div>
+            
+            <!-- Navigation -->
+            <nav style="padding: 24px 16px;">
+                <div id="navigation-items">
+                    <!-- Navigation items will be populated by JavaScript -->
+                </div>
+            </nav>
+        </aside>
 
-    <!-- Google Fonts - Roboto for MNIT-style typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <!-- Main Content -->
+        <main style="
+            flex: 1;
+            margin-left: 280px;
+            background-color: #f4f9fc;
+            min-height: 100vh;
+        ">
+            <!-- Header -->
+            <header style="
+                background: #ffffff;
+                border-bottom: 1px solid #e0e0e0;
+                padding: 16px 24px;
+                position: sticky;
+                top: 0;
+                z-index: 5;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            ">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <!-- Mobile Menu Toggle (Hidden on Desktop) -->
+                    <button id="mobile-toggle" style="
+                        display: none;
+                        background: #1d4e89;
+                        color: #ffffff;
+                        border: none;
+                        border-radius: 6px;
+                        padding: 8px 12px;
+                        cursor: pointer;
+                        font-size: 1.2rem;
+                        margin-right: 16px;
+                    ">☰</button>
+                    
+                    <div style="flex: 1;">
+                        <h2 style="
+                            font-size: 1.25rem;
+                            font-weight: 600;
+                            color: #1d4e89;
+                            margin: 0;
+                        ">College Management Dashboard</h2>
+                    </div>
+                    
+                    <!-- Search Bar -->
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <input 
+                            type="search" 
+                            placeholder="Search..." 
+                            style="
+                                padding: 8px 16px;
+                                border: 1px solid #cfd8e1;
+                                border-radius: 6px;
+                                background: #ffffff;
+                                color: #1d4e89;
+                                width: 200px;
+                                font-size: 14px;
+                            "
+                        />
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <button style="
+                                background: none;
+                                border: 1px solid #e0e0e0;
+                                color: #1d4e89;
+                                border-radius: 6px;
+                                padding: 8px;
+                                cursor: pointer;
+                                font-size: 16px;
+                            ">⚙️</button>
+                            <div style="
+                                width: 32px;
+                                height: 32px;
+                                background: #1d4e89;
+                                color: #ffffff;
+                                border-radius: 50%;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-weight: bold;
+                                font-size: 12px;
+                            ">AD</div>
+                        </div>
+                    </div>
+                </div>
+            </header>
 
-    <meta property="og:title" content="CampusFusion - College ERP System" />
-    <meta property="og:description" content="Modern, cloud-powered ERP system for small colleges with comprehensive management modules" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+            <!-- Page Content -->
+            <div id="main-content" style="flex: 1; min-height: calc(100vh - 100px);">
+                <!-- Content will be populated by JavaScript -->
+            </div>
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
+            <!-- Footer -->
+            <footer style="
+                background: #ffffff;
+                border-top: 1px solid #e0e0e0;
+                padding: 24px;
+                text-align: center;
+                color: #607d8b;
+                font-size: 0.875rem;
+                margin-top: auto;
+            ">
+                <p style="margin: 0;">© 2024 CampusFusion. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <!-- Mobile Menu Overlay (Hidden by default) -->
+    <div id="mobile-menu" style="
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0,0,0,0.5);
+        z-index: 20;
+    ">
+        <div style="
+            width: 280px;
+            height: 100vh;
+            background: #005f73;
+            color: #ffffff;
+            padding: 24px 0;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        " id="mobile-menu-content">
+            <div style="padding: 0 24px 32px 24px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h1 style="font-size: 1.5rem; font-weight: bold; margin: 0; color: #ffffff;">CampusFusion</h1>
+                    <button id="mobile-close" style="
+                        background: none;
+                        border: none;
+                        color: #ffffff;
+                        font-size: 1.5rem;
+                        cursor: pointer;
+                        padding: 4px;
+                    ">×</button>
+                </div>
+                <p style="
+                    font-size: 0.875rem;
+                    color: rgba(255,255,255,0.8);
+                    margin: 4px 0 0 0;
+                ">Management System</p>
+            </div>
+            <nav style="padding: 24px 16px;" id="mobile-navigation-items">
+                <!-- Mobile navigation items will be populated by JavaScript -->
+            </nav>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button id="fab-button" style="
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 56px;
+        height: 56px;
+        background: #1d4e89;
+        color: #ffffff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.5rem;
+        box-shadow: 0 4px 12px rgba(29, 78, 137, 0.3);
+        z-index: 10;
+        transition: transform 0.2s ease;
+    " 
+    onmouseover="this.style.transform='scale(1.1)'" 
+    onmouseout="this.style.transform='scale(1)'">+</button>
+
+    <!-- Mobile Responsive Styles -->
+    <style>
+        @media (max-width: 768px) {
+            aside {
+                display: none !important;
+            }
+            
+            main {
+                margin-left: 0 !important;
+            }
+            
+            #mobile-toggle {
+                display: block !important;
+            }
+            
+            header h2 {
+                font-size: 1rem !important;
+            }
+            
+            header input {
+                width: 150px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                padding: 12px 16px !important;
+            }
+            
+            header input {
+                width: 120px !important;
+                font-size: 12px !important;
+            }
+            
+            #main-content {
+                padding: 16px !important;
+            }
+            
+            #fab-button {
+                width: 48px !important;
+                height: 48px !important;
+                font-size: 1.2rem !important;
+            }
+        }
+        
+        .mobile-menu-open #mobile-menu-content {
+            transform: translateX(0) !important;
+        }
+        
+        /* Smooth transitions */
+        * {
+            box-sizing: border-box;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+        }
+        
+        input:focus {
+            outline: 2px solid #1d4e89;
+            outline-offset: 2px;
+        }
+    </style>
+
+    <script src="js/main.js"></script>
+</body>
 </html>
