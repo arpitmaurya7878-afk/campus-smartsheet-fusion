@@ -1,32 +1,27 @@
 /* ============= CAMPUSFUSION COLLEGE MANAGEMENT SYSTEM ============= */
-/* Tailwind CSS with custom configuration */
+/* Pure CSS - No external dependencies */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  * {
+/* Reset and Base Styles */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
 
-  html {
+html {
     font-size: 16px;
     line-height: 1.5;
-  }
+}
 
-  body {
+body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #f4f9fc;
     color: #1d4e89;
     overflow-x: hidden;
-  }
 }
 
-@layer base {
-  :root {
+/* Color Variables */
+:root {
     --sidebar-bg: #005f73;
     --sidebar-active: #0a9396;
     --sidebar-text: #ffffff;
@@ -47,44 +42,37 @@
     --search-placeholder: #90a4ae;
     --fab-bg: #1d4e89;
     --fab-icon: #ffffff;
-    --tab-selected-bg: #1d4e89;
-    --tab-selected-text: #ffffff;
-    --tab-unselected-bg: #d0e4f7;
-    --tab-unselected-text: #1d4e89;
-  }
 }
 
-@layer components {
-  /* Custom animations */
-  @keyframes fadeIn {
+/* Utility Classes */
+.hidden { display: none !important; }
+.flex { display: flex; }
+.grid { display: grid; gap: 1rem; }
+.text-center { text-align: center; }
+.font-bold { font-weight: bold; }
+.rounded { border-radius: 0.375rem; }
+.shadow { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); }
+
+/* Animations */
+@keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
-  }
-
-  .animate-fade-in { 
-    animation: fadeIn 0.3s ease-out; 
-  }
-
-  /* Mobile Menu Animation */
-  .mobile-menu-open #mobile-menu-content {
-    transform: translateX(0) !important;
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar { 
-    width: 8px; 
-  }
-  
-  ::-webkit-scrollbar-track { 
-    background: var(--main-bg); 
-  }
-  
-  ::-webkit-scrollbar-thumb { 
-    background: var(--search-border); 
-    border-radius: 4px; 
-  }
-  
-  ::-webkit-scrollbar-thumb:hover { 
-    background: var(--description-text); 
-  }
 }
+
+.animate-fade-in { animation: fadeIn 0.3s ease-out; }
+
+/* Mobile Menu Animation */
+.mobile-menu-open #mobile-menu-content {
+    transform: translateX(0) !important;
+}
+
+/* Responsive Grid */
+@media (max-width: 768px) {
+    .grid { grid-template-columns: 1fr !important; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--main-bg); }
+::-webkit-scrollbar-thumb { background: var(--search-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--description-text); }
